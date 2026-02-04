@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+gspread
+oauth2client
+python-dotenv
+google-genai
+Pillow
+requests

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Core v2</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;900&family=Rajdhani:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="intro-layer">
+        <canvas id="starfield"></canvas>
+        <div id="rocket-container">
+            <img src="/static/rocket.png" id="rocket" alt="Rocket">
+        </div>
+        <div id="click-hint">CLICK PARA ENTRAR</div>
+    </div>
+
+    <div id="app-layer" class="hidden">
+        <header id="hud-top">
+            <div class="hud-item">
+                <span class="hud-label">LOGS ACTIVE</span>
+                <span class="hud-value neon-blue" id="countdown">00:00:00</span>
+            </div>
+            <div class="hud-title">AUTOMATION COMMAND</div>
+            <div class="hud-item" style="text-align:right">
+                <span class="hud-label">PENDING</span>
+                <span class="hud-value" id="stats-pending">--</span>
+            </div>
+        </header>
+
+        <div id="node-workspace">
+            <svg id="cables-layer"></svg>
+            <div id="nodes-layer"></div>
+        </div>
+
+        <div id="details-panel">
+            <div class="panel-header">
+                <h3 id="panel-title">MÓDULO</h3>
+                <button id="btn-close-panel">CERRAR</button>
+            </div>
+            <div id="panel-content"></div>
+            <div class="panel-actions">
+                <button id="btn-panel-action" class="neon-btn">MODIFICAR</button>
+            </div>
+        </div>
+
+        <div id="floating-controls">
+            <button id="btn-refresh" class="icon-btn">REFRESCO</button>
+            <button id="btn-run-all" class="icon-btn danger">LAUNCH MANUAL</button>
+        </div>
+
+        <!-- AI CHAT INTERFACE -->
+        <div id="ai-chat-container">
+            <div id="chat-window" class="chat-closed">
+                <div class="chat-header">
+                    <span>CENTRO DE MANDO IA</span>
+                    <button id="btn-close-chat">_</button>
+                </div>
+                <div id="chat-messages">
+                    <div class="msg ai-msg">Saludos, Comandante. ¿En qué puedo ayudarte hoy? 🤖</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Escribe un comando...">
+                    <button id="btn-send-chat">></button>
+                </div>
+            </div>
+            <button id="btn-open-chat" class="chat-bubble">💬 AI</button>
+        </div>
+    </div>
+
+    <audio id="launch-sound" src="/static/launch.mp3"></audio>
+    <script src="/static/intro.js"></script>
+    <script src="/static/nodes.js"></script>
+    <script src="/static/chat.js"></script>
+</body>
+
+</html>

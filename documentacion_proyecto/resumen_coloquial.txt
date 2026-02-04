@@ -1,0 +1,19 @@
+¡Hola! Aquí tienes el resumen de cómo va la cosa con el proyecto de "Automatización Redes Sociales".
+
+**¿De qué va esto?**
+Básicamente, queremos que esto funcione solo: leer ideas de un Excel (Google Sheets), crear una imagen chula con IA (Google Vertex AI) y publicarlo en Facebook e Instagram sin que tengamos que mover un dedo.
+
+**¿Qué llevamos hecho y qué funciona?**
+1.  **La base:** Tenemos el esqueleto montado en `main.py`.
+2.  **Google Sheets:** Conectamos bien. El script `setup_sheet.py` y `debug_sheet.py` leen las filas sin problemas. Si pones algo en el Sheet, el script lo ve.
+3.  **Imágenes con IA:** Esto mola mucho. `test_vertex_image.py` es capaz de generar imágenes. A veces se pone tonto con los filtros de seguridad, pero en general tira.
+4.  **Facebook/Instagram:** Aquí está la "chicha". Tenemos scripts para sacar IDs (`get_ids.py`) y para probar el posteo (`verify_publishing_fb.py`). Hemos conseguido postear, pero... (leer abajo).
+5.  **Debug:** Hemos sido listos y tenemos scripts pequeñitos para probar cada pieza por separado (`debug_fb.py`, `test_connection.py`). Así si algo falla, sabemos dónde es.
+
+**Los dolores de cabeza (Errores y cosas pendientes):**
+*   **Tokens de Facebook:** Son un dolor. Caducan, o a veces dicen que no tienes permisos aunque crees que sí. Hemos estado peleando para conseguir un token permanente (`GUIA_TOKEN_PERMANENTE.md`). Si algo falla, el 90% de las veces es el token que ha caducado o faltan permisos (`pages_manage_posts`).
+*   **Permisos de la App:** La app de "automatizacion" en Meta a veces se pone exquisita con quién puede postear. Hay que revisar que el usuario tenga rol de editor o admin en la página "La Cueva del Eco".
+*   **Publicación de Imágenes:** A veces generamos la foto pero falla al subirla a FB porque la URL caduca o el formato no le gusta.
+
+**Resumen:**
+La máquina está montada. Falta afinar el engranaje final de Facebook para que no se queje de los permisos y dejarlo rodando automático. ¡Ah! Y ya hemos migrado los posts y les hemos puesto la hora a las 10:00 AM para que salgan todos puntuales. ¡Vamos bien!

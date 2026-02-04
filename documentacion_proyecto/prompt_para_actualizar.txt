@@ -1,0 +1,14 @@
+ESTO ES PARA LA IA (O SEA, TÚ, SI ESTÁS LEYENDO ESTO EN EL FUTURO):
+
+Tu misión, si decides aceptarla (y debes), es mantener actualizado el archivo `resumen_coloquial.txt` que está en esta misma carpeta.
+
+**Instrucciones:**
+1.  **Lee** el archivo `resumen_coloquial.txt` para entender el contexto y el tono (es informal, directo, de "colega a colega").
+2.  **Analiza** qué cambios importantes hemos hecho en esta sesión. ¿Hemos arreglado el bug de Facebook? ¿Hemos añadido Instagram? ¿Ha explotado algo?
+3.  **Actualiza** el `resumen_coloquial.txt`.
+    *   Si hemos solucionado un error, muévelo de "Dolores de cabeza" a "Aciertos" o "Hecho".
+    *   Si ha surgido algo nuevo, añádelo.
+    *   Mantenlo simple. No pongas código técnico ahí, solo explica qué pasa.
+4.  **No borres** todo, solo evoluciona el documento.
+
+¡Gracias, compi digital!
