@@ -27,14 +27,36 @@ if not all([FB_PAGE_ACCESS_TOKEN, FB_PAGE_ID, IG_ACCOUNT_ID, GOOGLE_SHEETS_KEY_P
     sys.exit(1)
 
 # Configurar Gemini
-client = genai.Client(api_key=GEMINI_API_KEY)
+# Configurar Gemini (Vertex AI para facturación)
+PROJECT_ID = 'bot-redes-486401'
+LOCATION = 'us-central1'
+GOOGLE_SHEETS_KEY_PATH = os.getenv('GOOGLE_SHEETS_KEY_PATH')
+
+try:
+    from google.oauth2 import service_account
+    # Cargar credenciales con scope de cloud-platform para Vertex AI
+    creds_vertex = service_account.Credentials.from_service_account_file(
+        GOOGLE_SHEETS_KEY_PATH,
+        scopes=['https://www.googleapis.com/auth/cloud-platform']
+    )
+    client = genai.Client(
+        vertexai=True,
+        project=PROJECT_ID,
+        location=LOCATION,
+        credentials=creds_vertex
+    )
+    print(f" [INIT] Cliente Gemini inicializado en modo Vertex AI ({PROJECT_ID})")
+except Exception as e:
+    print(f" [ERROR] Falló init de Vertex AI: {e}")
+    # Fallback a API Key si falla Vertex (aunque probablemente falle por quota igual)
+    client = genai.Client(api_key=GEMINI_API_KEY)
 
 def get_google_sheets_client():
     """Conecta a Google Sheets usando Service Account."""
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_SHEETS_KEY_PATH, scope)
-    client = gspread.authorize(creds)
-    return client
+    client_sheets = gspread.authorize(creds)
+    return client_sheets
 
 def generate_image(prompt, output_path="static/generated/last_gen.png"):
     """Genera una imagen usando Gemini (Imagen 4) y la guarda."""
@@ -43,7 +65,7 @@ def generate_image(prompt, output_path="static/generated/last_gen.png"):
         # Intento 1: Usar el modelo de Imagen 4 (si está disponible y facturado)
         try:
             response = client.models.generate_images(
-                model='imagen-4.0-generate-001',
+                model='imagen-3.0-generate-001',
                 prompt=prompt,
                 config=types.GenerateImagesConfig(
                     number_of_images=1,
