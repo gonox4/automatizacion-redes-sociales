@@ -61,6 +61,10 @@ def get_google_sheets_client():
 def generate_image(prompt, output_path="static/generated/last_gen.png"):
     """Genera una imagen usando Gemini (Imagen 4) y la guarda."""
     print(f"Generando imagen para: {prompt}...")
+    
+    # Asegurar que el directorio existe
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
     try:
         # Intento 1: Usar el modelo de Imagen 4 (si está disponible y facturado)
         try:
@@ -105,7 +109,9 @@ def generate_image(prompt, output_path="static/generated/last_gen.png"):
         return output_path
 
     except Exception as e:
-        print(f"Error generando imagen: {e}")
+        print(f"Error generando imagen (CRITICO): {e}")
+        import traceback
+        traceback.print_exc()
         return None
 
 def publish_facebook_photo(image_path, caption):
